@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/public/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="/public/form-validation/css/formValidation.min.css" />
     <link rel="stylesheet" href="/public/jquery-confirm/jquery-confirm.min.css" />
+
     <link rel="stylesheet" href="/public/assets/css/login.css"/>
 </head>
 <!-- END HEAD -->
@@ -72,19 +73,19 @@
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li value="+86" checked><a href="#">+86</a></li>
+                                        <li value="+86" check><a href="#">+86</a></li>
                                         <li value="+88"><a href="#">+88</a></li>
                                         <li value="+89"><a href="#">+89</a></li>
                                         <li value="+101"><a href="#">+101</a></li>
                                         <li value="+222"><a href="#">+222</a></li>
                                     </ul>
                                 </div><!-- /btn-group -->
-                                <input type="text" class="form-control" name="fmobile" id="fmobile" placeholder="请输入11位手机号..." minlength="11" maxlength="11">
+                                <input type="text" class="form-control" name="fmobile" id="fmobile" placeholder="请输入11位手机号...">
                             </div><!-- /input-group -->
                         </div>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="fverifyCode" id="fverifyCode" placeholder="请输入6位验证码..." minlength="6" maxlength="6">
+                                <input type="text" class="form-control" name="fverifyCode" id="fverifyCode" placeholder="请输入6位验证码...">
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-success" id="getVerifyCode">获取验证码</button>
                                 </div><!-- /btn-group -->
@@ -175,9 +176,6 @@
         });
         
         $('#typeAppend').on('click', '#mobile_btn', function () {
-            $('#mobileForm')[0].reset();
-            $('#loginForm')[0].reset();
-            console.log('mobile');
             $('#loginForm').hide();
             $('#mobileForm').show();
             $('#mobileForm').removeClass();
@@ -192,9 +190,6 @@
         });
 
         $('#typeAppend').on('click', '#normal_btn', function () {
-            $('#mobileForm')[0].reset();
-            $('#loginForm')[0].reset();
-            console.log('normal');
             $('#loginForm').show();
             $('#mobileForm').hide();
             $('#normal_btn').remove();
@@ -206,6 +201,31 @@
                 "                            </button>"
             );
         });
+
+        //获取url中的参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null; //返回参数值
+        }
+
+        //注册页面跳转手机登录
+        if(getUrlParam('from') == 0){
+            $('#loginForm').hide();
+            $('#mobileForm').show();
+            $('#mobileForm').removeClass();
+            $('#mobile_btn').remove();
+            $('#typeAppend').prepend(
+                "<button type='button' class='btn btn-default mobile-btn' id='normal_btn'>" +
+                "                                <label>" +
+                "                                    <img src='/images/basic/normal.png'/>" +
+                "                                </label>&nbsp;&nbsp;账号登录" +
+                "                            </button>"
+            );
+        }
     });
 
     <!-- 账号密码登录 -->
@@ -299,12 +319,22 @@
                     validators: {
                         notEmpty: {
                             message: '请输入11位手机号.'
+                        },
+                        stringLength: {
+                            min: 11,
+                            max: 11,
+                            message: '请输入11位手机号.'
                         }
                     }
                 },
                 fverifyCode: {
                     validators: {
                         notEmpty: {
+                            message: '请输入6位验证码.'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 6,
                             message: '请输入6位验证码.'
                         }
                     }

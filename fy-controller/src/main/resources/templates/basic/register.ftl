@@ -129,6 +129,10 @@
                 $('#repeatShowOrHide').attr('class', 'fa fa-eye');
             }
         });
+        
+        $('#mobile_btn').on('click', function () {
+            window.location.href="/api/v1/partner/toLogin?from=0";
+        });
     });
 
     $(document).ready(function() {
@@ -167,7 +171,12 @@
             var fusername = $("#fusername").val();
             var fpassword = $("#fpassword").val();
             var frepeat = $("#frepeat").val();
-            var data = {"account": fusername, "password": $.md5(fpassword), "comfirmPassword": $.md5(frepeat), "type": 2};
+            var data = {
+                "account": fusername,
+                "password": $.md5(fpassword),
+                "comfirmPassword": $.md5(frepeat),
+                "type": 2
+            };
 
             $btn = $("#doRegister").button('loading');
             $.ajax({

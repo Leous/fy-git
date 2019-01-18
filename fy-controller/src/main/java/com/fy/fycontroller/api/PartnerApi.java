@@ -57,7 +57,7 @@ public class PartnerApi {
     /**
      * @param request
      * @param registerRequest
-     * @description: 用户注册
+     * @description: 用户注册(只处理账号密码登录情况)，其他通过手机或第三方软件首次注册的用户直接用登录接口实现
      * @author: cnc
      * @date: 2019-01-07 01:23:16
      * @return: com.fy.fyentity.results.ResponseEntry<java.lang.String>
@@ -73,46 +73,27 @@ public class PartnerApi {
             String password = registerRequest.getPassword();
             String comfirmPassword = registerRequest.getComfirmPassword();
 
-            if (FyUtils.isEmpty(type) && !"0".equals(type) && !"1".equals(type) && !"2".equals(type)) {
+            if (FyUtils.isEmpty(type) && !"2".equals(type)) {
                 responseEntry.setMessage("请选择注册方式");
                 return responseEntry;
             }
 
-            switch (type) {
-                case "0":
-                    //后台注册账号密码自动生成，无需填写
-                    responseEntry.setMessage("暂未开放后台注册");
-                    return responseEntry;
-//                    break;
-                case "1":
-                    //手机号注册必须要有手机号+验证码
-                    responseEntry.setMessage("暂未开放手机号注册");
-                    return responseEntry;
-//                    break;
-                case "2":
-                    //账号密码注册必须输入账号+密码+确认密码
-                    if (FyUtils.isEmpty(account)) {
-                        responseEntry.setMessage("请输入账号");
-                        return responseEntry;
-                    }
-                    if (FyUtils.isEmpty(password)) {
-                        responseEntry.setMessage("请输入密码");
-                        return responseEntry;
-                    }
-                    if (FyUtils.isEmpty(comfirmPassword)) {
-                        responseEntry.setMessage("请输入确认密码");
-                        return responseEntry;
-                    }
-                    if(!comfirmPassword.equals(password)){
-                        responseEntry.setMessage("两次输入的密码不一致");
-                        return responseEntry;
-                    }
-                    break;
-                //case "3": 后续加入第三方登录注册
-                default:
-                    //没有选择注册方式无法注册，并提示用户
-                    responseEntry.setMessage("请选择注册方式");
-                    return responseEntry;
+            //账号密码注册必须输入账号+密码+确认密码
+            if (FyUtils.isEmpty(account)) {
+                responseEntry.setMessage("请输入账号");
+                return responseEntry;
+            }
+            if (FyUtils.isEmpty(password)) {
+                responseEntry.setMessage("请输入密码");
+                return responseEntry;
+            }
+            if (FyUtils.isEmpty(comfirmPassword)) {
+                responseEntry.setMessage("请输入确认密码");
+                return responseEntry;
+            }
+            if(!comfirmPassword.equals(password)){
+                responseEntry.setMessage("两次输入的密码不一致");
+                return responseEntry;
             }
 
             String partnerId = FyUtils.getRandomNum(8);

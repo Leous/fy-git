@@ -58,6 +58,12 @@ body {
     margin-top: -0.1px;
 }
 
+.help-block {
+    float: left;
+    margin-top: -0.1px;
+    margin-bottom: 0px;
+}
+
 .suffixEye {
     background-color: #FFFFFF;
 }

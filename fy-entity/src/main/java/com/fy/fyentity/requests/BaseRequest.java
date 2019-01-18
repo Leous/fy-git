@@ -6,6 +6,8 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import org.joda.time.DateTime;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @description:
  * @author: cnc
@@ -15,13 +17,13 @@ import org.joda.time.DateTime;
         ignoreUnknown = true
 )
 public abstract class BaseRequest {
-    @NotBlank
+    @NotNull
     @JsonProperty("signType")
     private String signType;
-    @NotBlank
+    @NotNull
     @JsonProperty("sign")
     private String sign;
-    @NotBlank
+    @NotNull
     @JsonProperty("timestamp")
     private long timestamp;
 
