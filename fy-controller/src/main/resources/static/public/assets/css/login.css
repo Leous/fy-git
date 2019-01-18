@@ -1,0 +1,79 @@
+body {
+    height: 100%;
+    width: 100%;
+    background: url("/images/basic/background.jpg");
+    background-size:cover;
+}
+
+.title {
+    color: #FFFFFF;
+}
+
+.forget-a{
+    float: right;
+}
+
+.forget-a:hover {
+    text-decoration: none;
+}
+
+.submit-btn {
+    border-radius: 20px;
+    width: 200px;
+}
+
+.register-btn {
+    border: 0px!important;
+    border-radius: 20px;
+    width: 200px;
+    opacity:0.2;
+}
+
+.wechat-btn {
+    border-radius: 20px;
+    width: 40%;
+    margin-left: 3%;
+}
+
+
+.qq-btn {
+    border-radius: 20px;
+    width: 40%;
+}
+
+
+.github-btn {
+    border-radius: 20px;
+    width: 40%;
+    margin-left: 3%;
+}
+
+.mobile-btn {
+    border-radius: 20px;
+    width: 40%;
+}
+
+.fv-form-bootstrap .help-block {
+    float: left!important;
+    margin-top: -0.1px;
+}
+
+.suffixEye {
+    background-color: #FFFFFF;
+}
+
+.suffixPassword {
+    border-right: 0px;
+}
+
+.form-group {
+    padding-top: 2px;
+}
+
+.remember_checkbox {
+    padding-top: 2px;
+}
+
+.hide {
+    display: none;
+}

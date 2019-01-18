@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fy.fyrepo.interfaces.PartnerDao">
+  <resultMap id="BaseResultMap" type="com.fy.fyentity.dtos.PartnerDto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="partner_id" jdbcType="VARCHAR" property="partnerId" />
+    <result column="partner_name" jdbcType="VARCHAR" property="partnerName" />
+    <result column="puid" jdbcType="INTEGER" property="puid" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, partner_id, partner_name, puid, age, birthday, area_code, tel, email, `type`, create_time
+  </sql>
+  <insert id="insertPartner" parameterType="com.fy.fyentity.dtos.PartnerDto">
+    insert into fy_partner
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">                                                   id,                               </if>
+      <if test="partnerId != null and partnerId != ''">                        partner_id,                       </if>
+      <if test="partnerName != null and partnerName != ''">                    partner_name,                     </if>
+      <if test="puid != null">                                                 puid,                             </if>
+      <if test="age != null">                                                  age,                              </if>
+      <if test="birthday != null">                                             birthday,                         </if>
+      <if test="areaCode != null and areaCode != ''">                          area_code,                        </if>
+      <if test="tel != null and tel != ''">                                    tel,                              </if>
+      <if test="email != null and email != ''">                                email,                            </if>
+      <if test="type != null">                                                 `type`,                           </if>
+      <if test="createTime != null">                                           create_time,                      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">                                                   #{id,jdbcType=INTEGER},           </if>
+      <if test="partnerId != null and partnerId != ''">                        #{partnerId,jdbcType=VARCHAR},    </if>
+      <if test="partnerName != null and partnerName != ''">                    #{partnerName,jdbcType=VARCHAR},  </if>
+      <if test="puid != null">                                                 #{puid,jdbcType=INTEGER},         </if>
+      <if test="age != null">                                                  #{age,jdbcType=INTEGER},          </if>
+      <if test="birthday != null">                                             #{birthday,jdbcType=DATE},        </if>
+      <if test="areaCode != null and areaCode != ''">                          #{areaCode,jdbcType=VARCHAR},     </if>
+      <if test="tel != null and tel != ''">                                    #{tel,jdbcType=VARCHAR},          </if>
+      <if test="email != null and email != ''">                                #{email,jdbcType=VARCHAR},        </if>
+      <if test="type != null">                                                 #{type,jdbcType=INTEGER},         </if>
+      <if test="createTime != null">                                           #{createTime,jdbcType=TIMESTAMP}, </if>
+    </trim>
+  </insert>
+
+  <select id="getPartner" parameterType="PartnerDto" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fy_partner
+    <where>
+      <if test="id != null">                                AND id = #{id,jdbcType=INTEGER}                    </if>
+      <if test="partnerId != null and partnerId != ''">     AND partner_id = #{partnerId,jdbcType=VARCHAR}     </if>
+      <if test="partnerName != null and partnerName != ''"> AND partner_name = #{partnerName,jdbcType=VARCHAR} </if>
+      <if test="puid != null">                              AND puid = #{puid,jdbcType=INTEGER}                </if>
+      <if test="age != null">                               AND age = #{age,jdbcType=INTEGER}                  </if>
+      <if test="birthday != null">                          AND birthday = #{birthday,jdbcType=DATE}           </if>
+      <if test="areaCode != null and areaCode != ''">       AND area_code = #{areaCode,jdbcType=VARCHAR}       </if>
+      <if test="tel != null and tel != ''">                 AND tel = #{tel,jdbcType=VARCHAR}                  </if>
+      <if test="email != null and email != ''">             AND email = #{email,jdbcType=VARCHAR}              </if>
+      <if test="type != null">                              AND `type` = #{type,jdbcType=INTEGER}              </if>
+      <if test="createTime != null">                        AND create_time = #{createTime,jdbcType=TIMESTAMP} </if>
+    </where>
+  </select>
+</mapper>
