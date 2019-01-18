@@ -68,20 +68,9 @@
                     <div class="text-center">
                         <div class="form-group">
                             <div class="input-group">
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">区号
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li value="+86" check><a href="#">+86</a></li>
-                                        <li value="+88"><a href="#">+88</a></li>
-                                        <li value="+89"><a href="#">+89</a></li>
-                                        <li value="+101"><a href="#">+101</a></li>
-                                        <li value="+222"><a href="#">+222</a></li>
-                                    </ul>
-                                </div><!-- /btn-group -->
+                                <span class="input-group-addon areaCode-span">+86</span>
                                 <input type="text" class="form-control" name="fmobile" id="fmobile" placeholder="请输入11位手机号...">
-                            </div><!-- /input-group -->
+                            </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group">

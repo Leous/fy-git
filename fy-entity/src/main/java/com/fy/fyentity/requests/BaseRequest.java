@@ -9,7 +9,7 @@ import org.joda.time.DateTime;
 import javax.validation.constraints.NotNull;
 
 /**
- * @description:
+ * @description: 基础请求参数，必传，用于鉴定请求的有效性
  * @author: cnc
  * @date: 2019-01-07 1:00
  */

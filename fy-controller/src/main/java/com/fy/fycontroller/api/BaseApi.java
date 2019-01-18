@@ -16,6 +16,7 @@ public abstract class BaseApi {
     protected static final String API_PARTNER_REGISTER = "register";
     protected static final String API_PARTNER_TOREGISTER = "toRegister";
     protected static final String API_PARTNER_TOLOGIN = "toLogin";
+    public static final String API_PARTNER_GETAREACODE = "getAreaCode";
     protected static final String API_PARTNER_INFO = "info";
     protected static final String API_PARTNER_LOGIN = "basic";
 }

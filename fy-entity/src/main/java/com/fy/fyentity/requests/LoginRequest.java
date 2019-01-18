@@ -3,7 +3,7 @@ package com.fy.fyentity.requests;
 import lombok.Data;
 
 /**
- * @description:
+ * @description: 登录请求参数
  * @author: cnc
  * @date: 2019-01-18 21:05
  */

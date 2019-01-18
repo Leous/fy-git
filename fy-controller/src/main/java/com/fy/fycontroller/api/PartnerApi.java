@@ -1,5 +1,6 @@
 package com.fy.fycontroller.api;
 
+import com.fy.fycommon.constants.AreaCodeEnum;
 import com.fy.fycommon.constants.RespCodeEnum;
 import com.fy.fycommon.utils.FyUtils;
 import com.fy.fyentity.dtos.PartnerDto;
@@ -8,6 +9,7 @@ import com.fy.fyentity.requests.RegisterRequest;
 import com.fy.fyentity.results.ResponseEntry;
 import com.fy.fyentity.results.Result;
 import com.fy.fyserver.interfaces.PartnerService;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @description: 用户相关接口汇总
@@ -29,6 +32,32 @@ public class PartnerApi {
 
     @Autowired
     private PartnerService partnerService;
+
+    /**
+     * @description: 获取国际区号列表，暂时只支持+86
+     * @author: cnc
+     * @date: 2019-01-19 00:55:13
+     * @param request
+     * @return: com.fy.fyentity.results.ResponseEntry<java.util.List<java.lang.String>>
+     */
+    @ResponseBody
+    @RequestMapping(value = BaseApi.API_PARTNER_GETAREACODE)
+    public ResponseEntry<List<String>> getAreaCodeList(HttpServletRequest request){
+        ResponseEntry<List<String>> responseEntry = new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "", "", null);
+        try {
+            List<String> areaCodeList = AreaCodeEnum.getAreaCodeList();
+            if(areaCodeList.size() > 0){
+                responseEntry.setCode(RespCodeEnum.SUCCESS.code());
+                responseEntry.setMessage("区号列表查询成功");
+                responseEntry.setEntry(areaCodeList);
+            }else {
+                responseEntry.setMessage("无区号列表");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return responseEntry;
+    }
 
     /**
      * @description: 跳转至注册页面
