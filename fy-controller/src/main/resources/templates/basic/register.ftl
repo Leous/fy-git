@@ -98,6 +98,8 @@
 <script type="text/javascript" src="/public/form-validation/framework/bootstrap.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="/public/form-validation/js/zh_CN.js" charset="utf-8"></script>
 
+<script type="text/javascript" src="/public/scripts/jquery.common.js" charset="utf-8"></script>
+
 <!--[if lt IE 9]>
 <script src="/public/html5shiv.min.js"></script>
 <script src="/public/respond.min.js"></script>
@@ -181,7 +183,7 @@
             $btn = $("#doRegister").button('loading');
             $.ajax({
                 url: '/api/v1/partner/register',
-                data: JSON.stringify(data),
+                data: JSON.stringify(getSign(data, '/partner/register')),
                 type: 'POST',
                 contentType:"application/json",
                 dataType: 'json',

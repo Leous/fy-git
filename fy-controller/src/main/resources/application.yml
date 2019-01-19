@@ -4,37 +4,18 @@
 spring:
   profiles:
     active: dev
+
+swagger:
+  desc: fouyou接口文档
+  active:
+    profile: dev
 ---
 spring:
   profiles: dev
-  application:
-    name: fy_git
-  freemarker:
-    allow-request-override: false
-    cache: false
-    check-template-location: true
-    charset: UTF-8
-    content-type: text/html; charset=utf-8
-    expose-request-attributes: false
-    expose-session-attributes: false
-    expose-spring-macro-helpers: false
-    #模板加载的位置
-    template-loader-path: classpath:/templates/
-    #后缀
-    suffix: .ftl
-    settings:
-      locale: zh_CN
-      date_format: yyyy-MM-dd
-      time_format: HH:mm:ss
-      datetime_format: yyyy-MM-dd HH:mm:ss
-      number_format: 0.##
   jackson:
     time-zone: GMT+8
-
   resources:
     static-locations: classpath:/static/**
-
-  # database configuration
   datasource:
     #是否启用数据库模式
     enable: true
@@ -71,13 +52,38 @@ spring:
     # 合并多个DruidDataSource的监控数据
     #useGlobalDataSourceStat: true
 
- # Application configuration
+application:
+  name: fy_git
+
+swagger:
+  enabled: true
+
 server:
   port: 8081
 
 logs:
   path: ./logs
   level: debug
+
+freemarker:
+  allow-request-override: false
+  cache: false
+  check-template-location: true
+  charset: UTF-8
+  content-type: text/html; charset=utf-8
+  expose-request-attributes: false
+  expose-session-attributes: false
+  expose-spring-macro-helpers: false
+  #模板加载的位置
+  template-loader-path: classpath:/templates/
+  #后缀
+  suffix: .ftl
+  settings:
+    locale: zh_CN
+    date_format: yyyy-MM-dd
+    time_format: HH:mm:ss
+    datetime_format: yyyy-MM-dd HH:mm:ss
+    number_format: 0.##
 
 # mybatis configuration
 mybatis:
@@ -113,3 +119,5 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+---

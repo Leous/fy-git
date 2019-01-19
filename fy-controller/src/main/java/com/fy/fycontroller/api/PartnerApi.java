@@ -5,13 +5,16 @@ import com.fy.fycommon.constants.RespCodeEnum;
 import com.fy.fycommon.utils.FyUtils;
 import com.fy.fyentity.dtos.PartnerDto;
 import com.fy.fyentity.dtos.PartnerUserDto;
+import com.fy.fyentity.requests.LoginRequest;
 import com.fy.fyentity.requests.RegisterRequest;
 import com.fy.fyentity.results.ResponseEntry;
 import com.fy.fyentity.results.Result;
 import com.fy.fyserver.interfaces.PartnerService;
-import com.google.common.collect.Lists;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +31,8 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = BaseApi.API_USER)
-public class PartnerApi {
+@Api(tags = "用户相关API")
+public class PartnerApi extends BasicApi {
 
     @Autowired
     private PartnerService partnerService;
@@ -42,6 +46,7 @@ public class PartnerApi {
      */
     @ResponseBody
     @RequestMapping(value = BaseApi.API_PARTNER_GETAREACODE)
+    @ApiOperation(value="获取国际区号列表", httpMethod="POST")
     public ResponseEntry<List<String>> getAreaCodeList(HttpServletRequest request){
         ResponseEntry<List<String>> responseEntry = new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "", "", null);
         try {
@@ -67,6 +72,7 @@ public class PartnerApi {
      * @return: java.lang.String
      */
     @RequestMapping(value = BaseApi.API_PARTNER_TOREGISTER, method = RequestMethod.GET)
+    @ApiOperation(value="跳转至注册页面", httpMethod="GET")
     public String toRegister(HttpServletRequest request) {
         return "/basic/register";
     }
@@ -79,6 +85,7 @@ public class PartnerApi {
      * @return: java.lang.String
      */
     @RequestMapping(value = BaseApi.API_PARTNER_TOLOGIN, method = RequestMethod.GET)
+    @ApiOperation(value="跳转至登录页面", httpMethod="GET")
     public String toLogin(HttpServletRequest request) {
         return "/basic/login";
     }
@@ -93,36 +100,36 @@ public class PartnerApi {
      */
     @ResponseBody
     @RequestMapping(value = BaseApi.API_PARTNER_REGISTER, method = RequestMethod.POST)
-    public ResponseEntry<String> register(HttpServletRequest request, @RequestBody RegisterRequest registerRequest) {
-        ResponseEntry<String> responseEntry = new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "", "", null);
-
+    @ApiOperation(value="用户注册", httpMethod="POST")
+    public ResponseEntry<String> register(HttpServletRequest request, @Validated @RequestBody RegisterRequest registerRequest) {
         try {
+            //验证请求签名
+            ResponseEntry responseEntry = verifyParam(request, registerRequest);
+            if (responseEntry != null) {
+                return responseEntry;
+            }
+
             String type = registerRequest.getType();
             String account = registerRequest.getAccount();
             String password = registerRequest.getPassword();
             String comfirmPassword = registerRequest.getComfirmPassword();
 
             if (FyUtils.isEmpty(type) && !"2".equals(type)) {
-                responseEntry.setMessage("请选择注册方式");
-                return responseEntry;
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "请选择注册方式", "", null);
             }
 
             //账号密码注册必须输入账号+密码+确认密码
             if (FyUtils.isEmpty(account)) {
-                responseEntry.setMessage("请输入账号");
-                return responseEntry;
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "请输入账号", "", null);
             }
             if (FyUtils.isEmpty(password)) {
-                responseEntry.setMessage("请输入密码");
-                return responseEntry;
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "请输入密码", "", null);
             }
             if (FyUtils.isEmpty(comfirmPassword)) {
-                responseEntry.setMessage("请输入确认密码");
-                return responseEntry;
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "请输入确认密码", "", null);
             }
             if(!comfirmPassword.equals(password)){
-                responseEntry.setMessage("两次输入的密码不一致");
-                return responseEntry;
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "两次输入的密码不一致", "", null);
             }
 
             String partnerId = FyUtils.getRandomNum(8);
@@ -145,11 +152,23 @@ public class PartnerApi {
 
             Result<Integer> registerResult = partnerService.register(partnerDto, partnerUserDto);
             if(registerResult.isSuccess()){
-                responseEntry.setCode(RespCodeEnum.SUCCESS.code());
-                responseEntry.setMessage("注册成功");
+                return new ResponseEntry(RespCodeEnum.SUCCESS.code(), "注册成功", "", null);
             }else {
-                responseEntry.setMessage(registerResult.getReturnMessage());
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), registerResult.getReturnMessage(), "", null);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntry(RespCodeEnum.SERVER_RUNTIME_EXCEPTION.code(), "系统异常，请联系客服", "", null);
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = BaseApi.API_PARTNER_LOGIN)
+    @ApiOperation(value="用户登录", httpMethod="POST")
+    public ResponseEntry login(@RequestBody LoginRequest loginRequest){
+        ResponseEntry responseEntry = new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "", "", null);
+        try {
+
         } catch (Exception e) {
             e.printStackTrace();
         }

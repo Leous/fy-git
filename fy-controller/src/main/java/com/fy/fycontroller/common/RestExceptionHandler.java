@@ -11,6 +11,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 
@@ -146,6 +147,19 @@ public class RestExceptionHandler {
     @ExceptionHandler({MissingServletRequestParameterException.class})
     @ResponseBody
     public ResponseEntry<Object> requestMissingServletRequest(MissingServletRequestParameterException ex) {
+        ex.printStackTrace();
+        return new ResponseEntry(RespCodeEnum.HTTP_BAD_REQUEST.code(), RespCodeEnum.HTTP_BAD_REQUEST.getReasonCNPhrase(), "", null);
+    }
+
+    /**
+     * 400错误
+     *
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler({MethodArgumentNotValidException.class})
+    @ResponseBody
+    public ResponseEntry<Object> requestMissingServletRequest(MethodArgumentNotValidException ex) {
         ex.printStackTrace();
         return new ResponseEntry(RespCodeEnum.HTTP_BAD_REQUEST.code(), RespCodeEnum.HTTP_BAD_REQUEST.getReasonCNPhrase(), "", null);
     }

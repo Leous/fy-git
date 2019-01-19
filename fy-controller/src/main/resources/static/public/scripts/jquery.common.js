@@ -165,3 +165,25 @@ function getObjectType(o) {
     var _t;
     return ((_t = typeof(o)) == "object" ? Object.prototype.toString.call(o).slice(8,-1):_t).toLowerCase();
 }
+
+function getSign(params, url) {
+    var timestamp = new Date().getTime();//每次请求都是新的时间戳
+    params['timestamp'] = timestamp;
+    params['language'] = "zh_CN";
+
+    var mapArr = [];
+    for (var key in params) {
+        mapArr.push(key);
+    }
+    mapArr.sort();
+    var sign = "";
+    $.each(mapArr, function (i, key) {
+        sign = sign + key + "=" + params[key] + "&";
+    });
+    sign = sign.substring(0, sign.length - 1);
+    sign = $.md5(sign).toString();
+
+    params['sign'] = sign;
+    params['signType'] = "MD5";
+    return params;
+}

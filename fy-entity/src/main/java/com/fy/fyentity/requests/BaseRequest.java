@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotBlank;
 
+import org.jboss.logging.Message;
 import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 
@@ -24,9 +26,10 @@ public abstract class BaseRequest {
     @JsonProperty("sign")
     private String sign;
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("timestamp")
     private long timestamp;
-
+    @NotNull
     @JsonProperty("language")
     private String language;
 
