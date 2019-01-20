@@ -76,7 +76,7 @@ public class PartnerApi extends BasicApi {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntry(RespCodeEnum.SERVER_RUNTIME_EXCEPTION.code(), "系统异常，请反馈建议报错..", "", null);
+            return new ResponseEntry(RespCodeEnum.SERVER_RUNTIME_EXCEPTION.code(), "系统异常，请反馈建议报错.", "", null);
         }
     }
 

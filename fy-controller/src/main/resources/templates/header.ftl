@@ -6,16 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>findyou</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no">
-    <link rel="stylesheet" href="/static/public/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/public/assets/css/default.css"/>
+    <link rel="stylesheet" href="/public/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/public/form-validation/css/formValidation.min.css" />
+    <link rel="stylesheet" href="/public/jquery-confirm/jquery-confirm.min.css" />
 
-    <script type="text/javascript" src="/static/public/scripts/jquery-2.1.4.min.js?v=2017010122" charset="utf-8"></script>
-    <script type="text/javascript" src="/static/public/scripts/jquery.common.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/static/public/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="/public/assets/css/default.css"/>
+
+    <script type="text/javascript" src="/public/scripts/jquery-2.1.4.min.js?v=2017010122" charset="utf-8"></script>
+    <script type="text/javascript" src="/public/scripts/jquery.common.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/public/jQuery.md5.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/public/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+
+    <script type="text/javascript" src="/public/jquery-confirm/jquery-confirm.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/public/form-validation/js/formValidation.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/public/form-validation/framework/bootstrap.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/public/form-validation/js/zh_CN.js" charset="utf-8"></script>
 
     <!--[if lt IE 9]>
-    <script src="/static/public/html5shiv.min.js"></script>
-    <script src="/static/public/respond.min.js"></script>
+    <script src="/public/html5shiv.min.js"></script>
+    <script src="/public/respond.min.js"></script>
     <![endif]-->
 </head>
 <!-- END HEAD -->
