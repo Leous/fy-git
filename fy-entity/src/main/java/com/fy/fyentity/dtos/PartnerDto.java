@@ -31,4 +31,6 @@ public class PartnerDto extends BasicDto implements Serializable {
     private Integer type;
 
     private Date createTime;
+
+    private Integer basicStatus;
 }

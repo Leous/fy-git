@@ -65,6 +65,22 @@ public class PartnerServiceImpl implements PartnerService {
         }
     }
 
+    @Override
+    public Result<PartnerDto> getPartner(PartnerDto partnerDto) {
+        Result<PartnerDto> result = new Result<>(false, "查询失败", "");
+        try {
+            PartnerDto findPartner = partnerDao.getPartner(partnerDto);
+            if(findPartner != null){
+                result.setSuccess(true);
+                result.setReturnMessage("查询成功");
+                result.setEntry(findPartner);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     /**
      * @description: 验证注册账户公共方法
      * @author: cnc
@@ -76,6 +92,7 @@ public class PartnerServiceImpl implements PartnerService {
     private Map<String, String> verifyAccount(PartnerDto partnerDto, PartnerUserDto partnerUserDto) {
         Map<String, String> verifyMap = Maps.newHashMap();
         String verifyStatus = "true";
+        verifyMap.put("verifyStatus", verifyStatus);
         try{
             PartnerUserDto resultUser = null;
             PartnerDto resultPartner = null;

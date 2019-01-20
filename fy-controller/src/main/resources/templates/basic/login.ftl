@@ -215,6 +215,18 @@
                 "                            </button>"
             );
         }
+        
+        $('#wechat_btn').on('click', function () {
+            $.alert('暂不支持微信登录');
+        });
+
+        $('#github_btn').on('click', function () {
+            $.alert('暂不支持github登录');
+        });
+
+        $('#qq_btn').on('click', function () {
+            $.alert('暂不支持QQ登录');
+        });
     });
 
     <!-- 账号密码登录 -->
@@ -250,7 +262,7 @@
             $btn = $("#doLogin").button('loading');
             $.ajax({
                 url: '/api/v1/partner/login',
-                data: JSON.stringify(data),
+                data: JSON.stringify(getSign(data, '/api/v1/partner/login')),
                 type: 'POST',
                 contentType:"application/json",
                 dataType: 'json',
@@ -265,7 +277,7 @@
                             buttons: {
                                 'ok': {
                                     action: function () {
-                                        window.location.href="/api/v1/partner/index";
+                                        // window.location.href="/api/v1/partner/index";
                                     }
                                 }
                             }
@@ -343,7 +355,7 @@
             $btn = $("#doMobileLogin").button('loading');
             $.ajax({
                 url: '/api/v1/partner/login',
-                data: JSON.stringify(data),
+                data: JSON.stringify(getSign(data, '/api/v1/partner/login')),
                 type: 'POST',
                 contentType:"application/json",
                 dataType: 'json',

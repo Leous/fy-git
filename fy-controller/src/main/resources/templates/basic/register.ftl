@@ -135,30 +135,64 @@
         $('#mobile_btn').on('click', function () {
             window.location.href="/api/v1/partner/toLogin?from=0";
         });
+
+        $('#wechat_btn').on('click', function () {
+            $.alert('暂不支持微信登录');
+        });
+
+        $('#github_btn').on('click', function () {
+            $.alert('暂不支持github登录');
+        });
+
+        $('#qq_btn').on('click', function () {
+            $.alert('暂不支持QQ登录');
+        });
     });
 
     $(document).ready(function() {
         $('#registerForm').formValidation({
             framework: 'bootstrap',
+            feedbackIcons: {
+                valid: 'fa fa-check'
+            },
             fields: {
                 fusername: {
+                    verbose: false,//代表验证按顺序验证。验证成功才会下一个
                     validators: {
                         notEmpty: {
                             message: '请输入账号.'
-                        }
+                        }/*,
+                        remote: {
+                            url: '/api/v1/partner/verifyAccount',//验证地址
+                            message: '用户已存在',//提示消息
+                            delay:  2000,//每输入一个字符，就发ajax请求，服务器压力还是太大，设置2秒发送一次ajax（默认输入一个字符，提交一次，服务器压力太大）
+                            type: 'POST',
+                            contentType: "application/json",
+                            data: JSON.stringify(getSign({"account": $("#fusername").val()}, '/partner/verifyAccount'))
+                        }*/
                     }
                 },
                 fpassword: {
+                    verbose: false,
                     validators: {
                         notEmpty: {
                             message: '请输入密码.'
+                        },
+                        identical: {
+                            field: 'frepeat',
+                            message: '两次输入的密码不一致.'
                         }
                     }
                 },
                 frepeat: {
+                    verbose: false,
                     validators: {
                         notEmpty: {
                             message: '请再次输入密码.'
+                        },
+                        identical: {
+                            field: 'fpassword',
+                            message: '两次输入的密码不一致.'
                         }
                     }
                 }
@@ -183,13 +217,12 @@
             $btn = $("#doRegister").button('loading');
             $.ajax({
                 url: '/api/v1/partner/register',
-                data: JSON.stringify(getSign(data, '/partner/register')),
+                data: JSON.stringify(getSign(data, '/api/v1/partner/register')),
                 type: 'POST',
                 contentType:"application/json",
                 dataType: 'json',
                 cache: false,
                 success: function(json){
-                    console.log(json);
                     $btn.button('reset');
                     if (json.code == "0000"){  //成功
                         $.alert({

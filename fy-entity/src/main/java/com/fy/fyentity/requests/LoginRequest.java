@@ -10,6 +10,12 @@ import lombok.Data;
 @Data
 public class LoginRequest extends BaseRequest {
 
+    private String type;//注册类型，0：后台注册；1：手机号注册；2：账号注册
+
+    private String account;//账号
+
+    private String password;//密码
+
     private String areaCode;//国家 手机前缀
 
     private String tel;//手机号注册

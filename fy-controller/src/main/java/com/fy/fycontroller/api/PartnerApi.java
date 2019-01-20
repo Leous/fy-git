@@ -7,9 +7,11 @@ import com.fy.fyentity.dtos.PartnerDto;
 import com.fy.fyentity.dtos.PartnerUserDto;
 import com.fy.fyentity.requests.LoginRequest;
 import com.fy.fyentity.requests.RegisterRequest;
+import com.fy.fyentity.requests.VerifyAccountRequest;
 import com.fy.fyentity.results.ResponseEntry;
 import com.fy.fyentity.results.Result;
 import com.fy.fyserver.interfaces.PartnerService;
+import com.fy.fyserver.interfaces.PartnerUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,47 @@ public class PartnerApi extends BasicApi {
 
     @Autowired
     private PartnerService partnerService;
+
+    @Autowired
+    private PartnerUserService partnerUserService;
+
+    /**
+     * @description: 注册验证账户是否被使用过
+     * @author: cnc
+     * @date: 2019-01-20 15:08:14
+     * @param request
+     * @param verifyAccountRequest
+     * @return: com.fy.fyentity.results.ResponseEntry
+     */
+    @RequestMapping(value = BaseApi.API_PARTNER_VERIFY_ACCOUNT)
+    @ResponseBody
+    @ApiOperation(value="验证用户名", httpMethod="POST")
+    public ResponseEntry verifyAccount(HttpServletRequest request, @Validated @RequestBody VerifyAccountRequest verifyAccountRequest){
+        try {
+            ResponseEntry responseEntry = verifyParam(request, verifyAccountRequest);
+            if(responseEntry != null){
+                return responseEntry;
+            }
+
+            String account = verifyAccountRequest.getAccount();
+
+            if(FyUtils.isEmpty(account)) {
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "请输入账号.", "", null);
+            }
+
+            PartnerUserDto partnerUserDto = new PartnerUserDto();
+            partnerUserDto.setAccount(account);
+            Result<PartnerUserDto> findAccountResult = partnerUserService.getPartnerUser(partnerUserDto);
+            if(!findAccountResult.isSuccess()){
+                return new ResponseEntry(RespCodeEnum.SUCCESS.code(), findAccountResult.getReturnMessage(), "", null);
+            }else {
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), findAccountResult.getReturnMessage(), "", null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntry(RespCodeEnum.SERVER_RUNTIME_EXCEPTION.code(), "系统异常，请反馈建议报错..", "", null);
+        }
+    }
 
     /**
      * @description: 获取国际区号列表，暂时只支持+86
@@ -115,21 +158,21 @@ public class PartnerApi extends BasicApi {
             String comfirmPassword = registerRequest.getComfirmPassword();
 
             if (FyUtils.isEmpty(type) && !"2".equals(type)) {
-                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "请选择注册方式", "", null);
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "请选择注册方式.", "", null);
             }
 
             //账号密码注册必须输入账号+密码+确认密码
             if (FyUtils.isEmpty(account)) {
-                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "请输入账号", "", null);
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "请输入账号.", "", null);
             }
             if (FyUtils.isEmpty(password)) {
-                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "请输入密码", "", null);
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "请输入密码.", "", null);
             }
             if (FyUtils.isEmpty(comfirmPassword)) {
-                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "请输入确认密码", "", null);
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "请输入确认密码.", "", null);
             }
             if(!comfirmPassword.equals(password)){
-                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "两次输入的密码不一致", "", null);
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "两次输入的密码不一致.", "", null);
             }
 
             String partnerId = FyUtils.getRandomNum(8);
@@ -152,26 +195,81 @@ public class PartnerApi extends BasicApi {
 
             Result<Integer> registerResult = partnerService.register(partnerDto, partnerUserDto);
             if(registerResult.isSuccess()){
-                return new ResponseEntry(RespCodeEnum.SUCCESS.code(), "注册成功", "", null);
+                return new ResponseEntry(RespCodeEnum.SUCCESS.code(), "注册成功.", "", null);
             }else {
                 return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), registerResult.getReturnMessage(), "", null);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntry(RespCodeEnum.SERVER_RUNTIME_EXCEPTION.code(), "系统异常，请联系客服", "", null);
+            return new ResponseEntry(RespCodeEnum.SERVER_RUNTIME_EXCEPTION.code(), "系统异常，请反馈建议报错.", "", null);
         }
     }
 
+    /**
+     * @description: 登录接口
+     * @author: cnc
+     * @date: 2019-01-20 18:31:29
+     * @param loginRequest
+     * @return: com.fy.fyentity.results.ResponseEntry
+     */
     @ResponseBody
     @RequestMapping(value = BaseApi.API_PARTNER_LOGIN)
     @ApiOperation(value="用户登录", httpMethod="POST")
-    public ResponseEntry login(@RequestBody LoginRequest loginRequest){
-        ResponseEntry responseEntry = new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "", "", null);
+    public ResponseEntry login(HttpServletRequest request, @Validated @RequestBody LoginRequest loginRequest){
         try {
+            ResponseEntry responseEntry = verifyParam(request, loginRequest);
+            if(responseEntry != null){
+                return responseEntry;
+            }
 
+            String type = loginRequest.getType();
+
+            if(FyUtils.isEmpty(type) && "2".equals(type)){
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "请选择登录方式.", "", null);
+            }
+
+            String account = loginRequest.getAccount();
+            String password = loginRequest.getPassword();
+
+            if(FyUtils.isEmpty(account) || FyUtils.isEmpty(password)){
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "请输入账号密码.", "", null);
+            }
+
+            PartnerUserDto partnerUserDto = new PartnerUserDto();
+            partnerUserDto.setAccount(account);
+            Result<PartnerUserDto> findPartnerUser = partnerUserService.getPartnerUser(partnerUserDto);
+            if(!findPartnerUser.isSuccess()){
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "用户名尚未注册.", "", null);
+            }
+            //获取查询到的用户信息，供后续使用
+            partnerUserDto = findPartnerUser.getEntry();
+
+            if(!FyUtils.getCertifiedSigned(password, partnerUserDto.getSalts()).equals(partnerUserDto.getPassword())){
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "用户密码错误.", "", null);
+            }
+
+            PartnerDto partnerDto = new PartnerDto();
+            partnerDto.setPuid(partnerUserDto.getId());
+            partnerDto.setPartnerId(partnerUserDto.getPartnerId());
+            Result<PartnerDto> findPartner = partnerService.getPartner(partnerDto);
+            if(!findPartner.isSuccess()){
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "用户名尚未注册.", "", null);
+            }
+
+            partnerDto = findPartner.getEntry();
+
+            if(partnerDto.getBasicStatus() == 0){
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "此用户已被封，无法正常登陆.", "", null);
+            } else if (partnerDto.getBasicStatus() == 1){
+                return new ResponseEntry(RespCodeEnum.SUCCESS.code(), "登录成功.", "", null);
+            } else if (partnerDto.getBasicStatus() == 2){
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "此用户已被注销，无法正常登陆.", "", null);
+            } else{
+                return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "用户状态异常，无法正常登陆.", "", null);
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            return new ResponseEntry(RespCodeEnum.SERVER_RUNTIME_EXCEPTION.code(), "系统异常，请反馈建议报错.", "", null);
         }
-        return responseEntry;
     }
 }

@@ -13,9 +13,10 @@
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="basic_status" jdbcType="INTEGER" property="basicStatus" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, partner_id, partner_name, puid, age, birthday, area_code, tel, email, `type`, create_time
+    id, partner_id, partner_name, puid, age, birthday, area_code, tel, email, `type`, create_time, basic_status
   </sql>
   <insert id="insertPartner" parameterType="com.fy.fyentity.dtos.PartnerDto">
     insert into fy_partner
@@ -31,6 +32,7 @@
       <if test="email != null and email != ''">                                email,                            </if>
       <if test="type != null">                                                 `type`,                           </if>
       <if test="createTime != null">                                           create_time,                      </if>
+      <if test="basicStatus != null">                                          basic_status,                      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">                                                   #{id,jdbcType=INTEGER},           </if>
@@ -44,6 +46,7 @@
       <if test="email != null and email != ''">                                #{email,jdbcType=VARCHAR},        </if>
       <if test="type != null">                                                 #{type,jdbcType=INTEGER},         </if>
       <if test="createTime != null">                                           #{createTime,jdbcType=TIMESTAMP}, </if>
+      <if test="basicStatus != null">                                          #{basicStatus,jdbcType=INTEGER},  </if>
     </trim>
   </insert>
 
@@ -63,6 +66,7 @@
       <if test="email != null and email != ''">             AND email = #{email,jdbcType=VARCHAR}              </if>
       <if test="type != null">                              AND `type` = #{type,jdbcType=INTEGER}              </if>
       <if test="createTime != null">                        AND create_time = #{createTime,jdbcType=TIMESTAMP} </if>
+      <if test="basicStatus != null">                       AND basic_status = #{basicStatus,jdbcType=INTEGER} </if>
     </where>
   </select>
 </mapper>
