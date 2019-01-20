@@ -32,7 +32,7 @@ import java.util.List;
  * @date: 2019-01-05 21:21
  */
 @Controller
-@RequestMapping(value = BaseApi.API_USER)
+@RequestMapping(value = BaseApi.API_PARTNER)
 @Api(tags = "用户相关API")
 public class PartnerApi extends BasicApi {
 

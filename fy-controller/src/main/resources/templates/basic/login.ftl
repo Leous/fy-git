@@ -277,7 +277,7 @@
                             buttons: {
                                 'ok': {
                                     action: function () {
-                                        // window.location.href="/api/v1/partner/index";
+                                        window.location.href="/api/v1/home/index";
                                     }
                                 }
                             }
