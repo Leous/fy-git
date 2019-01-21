@@ -2,6 +2,7 @@ package com.fy.fycontroller.api;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @description:
+ * @description: 首页相关API
  * @author: cnc
  * @date: 2019-01-21 0:12
  */
 @Controller
 @RequestMapping(value = BaseApi.API_HOME)
-@Api(tags = "首页相关API")
+@Api(value = BaseApi.API_HOME, tags = "Home Api", description = "首页相关")
+@Slf4j
 public class HomeApi {
 
     @RequestMapping(value = BaseApi.API_HOME_INDEX, method = RequestMethod.GET)

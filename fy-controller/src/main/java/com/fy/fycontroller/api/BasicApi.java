@@ -29,7 +29,6 @@ public class BasicApi {
      */
     public ResponseEntry verifyParam(HttpServletRequest request, BaseRequest baseRequest) {
         try {
-
             //时间戳必须传，且只能相差服务端当前时间 最多5分钟
             Long timestamp = baseRequest.getTimestamp();
 

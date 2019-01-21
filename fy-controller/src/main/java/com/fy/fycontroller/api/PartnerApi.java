@@ -33,7 +33,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = BaseApi.API_PARTNER)
-@Api(tags = "用户相关API")
+@Api(value = BaseApi.API_PARTNER, tags = "Partner Api", description = "用户相关")
 public class PartnerApi extends BasicApi {
 
     @Autowired

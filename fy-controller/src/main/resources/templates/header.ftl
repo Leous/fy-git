@@ -22,6 +22,7 @@
     <script type="text/javascript" src="/public/form-validation/js/formValidation.min.js" charset="utf-8"></script>
     <script type="text/javascript" src="/public/form-validation/framework/bootstrap.min.js" charset="utf-8"></script>
     <script type="text/javascript" src="/public/form-validation/js/zh_CN.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/public/scripts/page.js" charset="utf-8"></script>
 
     <!--[if lt IE 9]>
     <script src="/public/html5shiv.min.js"></script>
@@ -32,34 +33,30 @@
 
 <!-- BEGIN BODY -->
 <body>
-
-<!-- BEGIN HEADER -->
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">融川任务管理系统</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">公告</a></li>
-                <li class="dropdown">
-                    <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        梁帅&nbsp;<img src="../static/images/arrow.png"/>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a onclick="#">个人信息</a></li>
-                        <li><a onclick="#">退出</a></li>
+    <div class="adhead"></div>
+    <!-- BEGIN HEADER -->
+    <div class="banner" id="console">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <h1 class="navbar-brand">foryou</h1>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right nav-font">
+                        <li><a href="#">公告</a></li>
+                        <li class="dropdown">
+                            <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                梁帅
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a onclick="#">个人信息</a></li>
+                                <li><a onclick="#">退出</a></li>
+                            </ul>
+                        </li>
                     </ul>
-                </li>
-            </ul>
-        </div>
+                </div>
+            </div>
+        </nav>
     </div>
-</nav>
-<!-- END HEADER -->
+    <!-- END HEADER -->
 </#escape>

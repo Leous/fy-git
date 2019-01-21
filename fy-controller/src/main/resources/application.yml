@@ -63,7 +63,7 @@ server:
 
 logs:
   path: ./logs
-  level: debug
+  level: info
 
 freemarker:
   allow-request-override: false
