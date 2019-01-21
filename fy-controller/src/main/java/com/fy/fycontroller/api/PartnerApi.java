@@ -14,6 +14,7 @@ import com.fy.fyserver.interfaces.PartnerService;
 import com.fy.fyserver.interfaces.PartnerUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -34,6 +35,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = BaseApi.API_PARTNER)
 @Api(value = BaseApi.API_PARTNER, tags = "Partner Api", description = "用户相关")
+@Slf4j
 public class PartnerApi extends BasicApi {
 
     @Autowired
@@ -76,6 +78,7 @@ public class PartnerApi extends BasicApi {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            log.error("[用户注册事件] ip = [" + FyUtils.getIpAddr(request) + "]，用户 = [" + verifyAccountRequest.getAccount() + "]，验证用户名异常! Exception=" + e);
             return new ResponseEntry(RespCodeEnum.SERVER_RUNTIME_EXCEPTION.code(), "系统异常，请反馈建议报错.", "", null);
         }
     }
@@ -101,10 +104,12 @@ public class PartnerApi extends BasicApi {
             }else {
                 responseEntry.setMessage("无区号列表");
             }
+            return responseEntry;
         } catch (Exception e) {
             e.printStackTrace();
+            log.error("[用户常规事件] ip = [" + FyUtils.getIpAddr(request) + "]，获取区号列表异常! Exception=" + e);
+            return new ResponseEntry(RespCodeEnum.SERVER_RUNTIME_EXCEPTION.code(), "系统异常，请反馈建议报错.", "", null);
         }
-        return responseEntry;
     }
 
     /**
@@ -201,6 +206,7 @@ public class PartnerApi extends BasicApi {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            log.error("[用户注册事件] ip = [" + FyUtils.getIpAddr(request) + "], 用户 = [" + registerRequest.getAccount() + "]，注册异常! Exception=" + e);
             return new ResponseEntry(RespCodeEnum.SERVER_RUNTIME_EXCEPTION.code(), "系统异常，请反馈建议报错.", "", null);
         }
     }
@@ -261,6 +267,7 @@ public class PartnerApi extends BasicApi {
             if(partnerDto.getBasicStatus() == 0){
                 return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "此用户已被封，无法正常登陆.", "", null);
             } else if (partnerDto.getBasicStatus() == 1){
+                log.info("[用户登录事件] ip = [" + FyUtils.getIpAddr(request) + "], 用户 = [" + account + "]，登录成功!");
                 return new ResponseEntry(RespCodeEnum.SUCCESS.code(), "登录成功.", "", null);
             } else if (partnerDto.getBasicStatus() == 2){
                 return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "此用户已被注销，无法正常登陆.", "", null);
@@ -269,6 +276,7 @@ public class PartnerApi extends BasicApi {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            log.error("[用户登录事件] ip = [" + FyUtils.getIpAddr(request) + "], 用户 = [" + loginRequest.getAccount() + "]，登录异常! Exception=" + e);
             return new ResponseEntry(RespCodeEnum.SERVER_RUNTIME_EXCEPTION.code(), "系统异常，请反馈建议报错.", "", null);
         }
     }
