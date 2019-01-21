@@ -78,7 +78,7 @@ public class PartnerApi extends BasicApi {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            log.error("[用户注册事件] ip = [" + FyUtils.getIpAddr(request) + "]，用户 = [" + verifyAccountRequest.getAccount() + "]，验证用户名异常! Exception=" + e);
+            log.error("[用户注册事件] ip = [" + FyUtils.getIpAddr(request) + "], 用户 = [" + verifyAccountRequest.getAccount() + "], 验证用户名异常! Exception=" + e);
             return new ResponseEntry(RespCodeEnum.SERVER_RUNTIME_EXCEPTION.code(), "系统异常，请反馈建议报错.", "", null);
         }
     }
@@ -107,7 +107,7 @@ public class PartnerApi extends BasicApi {
             return responseEntry;
         } catch (Exception e) {
             e.printStackTrace();
-            log.error("[用户常规事件] ip = [" + FyUtils.getIpAddr(request) + "]，获取区号列表异常! Exception=" + e);
+            log.error("[用户常规事件] ip = [" + FyUtils.getIpAddr(request) + "], 获取区号列表异常! Exception=" + e);
             return new ResponseEntry(RespCodeEnum.SERVER_RUNTIME_EXCEPTION.code(), "系统异常，请反馈建议报错.", "", null);
         }
     }
@@ -206,7 +206,7 @@ public class PartnerApi extends BasicApi {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            log.error("[用户注册事件] ip = [" + FyUtils.getIpAddr(request) + "], 用户 = [" + registerRequest.getAccount() + "]，注册异常! Exception=" + e);
+            log.error("[用户注册事件] ip = [" + FyUtils.getIpAddr(request) + "], 用户 = [" + registerRequest.getAccount() + "], 注册异常! Exception=" + e);
             return new ResponseEntry(RespCodeEnum.SERVER_RUNTIME_EXCEPTION.code(), "系统异常，请反馈建议报错.", "", null);
         }
     }
@@ -276,7 +276,7 @@ public class PartnerApi extends BasicApi {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            log.error("[用户登录事件] ip = [" + FyUtils.getIpAddr(request) + "], 用户 = [" + loginRequest.getAccount() + "]，登录异常! Exception=" + e);
+            log.error("[用户登录事件] ip = [" + FyUtils.getIpAddr(request) + "], 用户 = [" + loginRequest.getAccount() + "], 登录异常! Exception=" + e);
             return new ResponseEntry(RespCodeEnum.SERVER_RUNTIME_EXCEPTION.code(), "系统异常，请反馈建议报错.", "", null);
         }
     }
