@@ -3,28 +3,37 @@
 <mapper namespace="com.fy.fyrepo.interfaces.PartnerUserDao">
   <resultMap id="BaseResultMap" type="com.fy.fyentity.dtos.PartnerUserDto">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="partner_id" jdbcType="VARCHAR" property="partnerId" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
     <result column="account" jdbcType="VARCHAR" property="account" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="salts" jdbcType="VARCHAR" property="salts" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, account, password, salts, create_time
+    id, partner_id, role_id, account, password, salts, ip, create_time
   </sql>
   <insert id="insertPartnerUser" parameterType="com.fy.fyentity.dtos.PartnerUserDto" useGeneratedKeys="true" keyProperty="id">
     insert into fy_partner_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">                                 id,                                     </if>
+      <if test="partnerId != null and partnerId !=''">       partner_id,                             </if>
+      <if test="roleId != null and roleId !=''">             role_id,                                </if>
       <if test="account != null and account !=''">           account,                                </if>
       <if test="password != null and password != ''">        password,                               </if>
       <if test="salts != null and salts != ''">              salts,                                  </if>
+      <if test="ip != null and ip != ''">                    ip,                                     </if>
       <if test="createTime != null">                         create_time,                            </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">                                 #{id,jdbcType=INTEGER},                 </if>
       <if test="account != null and account !=''">           #{account,jdbcType=VARCHAR},            </if>
+      <if test="partnerId != null and partnerId !=''">       #{partnerId,jdbcType=VARCHAR},          </if>
+      <if test="roleId != null and roleId !=''">             #{roleId,jdbcType=INTEGER},             </if>
       <if test="password != null and password != ''">        #{password,jdbcType=VARCHAR},           </if>
       <if test="salts != null and salts != ''">              #{salts,jdbcType=VARCHAR},              </if>
+      <if test="ip != null and ip != ''">                    #{ip,jdbcType=VARCHAR},                 </if>
       <if test="createTime != null">                         #{createTime,jdbcType=TIMESTAMP},       </if>
     </trim>
   </insert>
@@ -36,6 +45,9 @@
     <where>
       <if test="id != null">                                     AND id = #{id,jdbcType=INTEGER}               </if>
       <if test="account != null and account != ''">              AND account = #{account,jdbcType=VARCHAR}     </if>
+      <if test="partnerId != null and partnerId != ''">          AND partnerId = #{partnerId,jdbcType=VARCHAR} </if>
+      <if test="roleId != null and roleId != ''">                AND roleId = #{roleId,jdbcType=INTEGER}       </if>
+      <if test="ip != null and ip != ''">                        AND ip = #{ip,jdbcType=VARCHAR}               </if>
     </where>
   </select>
 </mapper>

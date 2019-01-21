@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fy.fyrepo.interfaces.PartnerMenusDao">
+  <resultMap id="BaseResultMap" type="com.fy.fyentity.dtos.PartnerMenusDto">
+    <id column="pmid" jdbcType="INTEGER" property="pmid" />
+    <result column="parent_pmid" jdbcType="INTEGER" property="parentPmid" />
+    <result column="menu_type" jdbcType="INTEGER" property="menuType" />
+    <result column="menu_code" jdbcType="VARCHAR" property="menuCode" />
+    <result column="menu_name_ch" jdbcType="VARCHAR" property="menuNameCh" />
+    <result column="menu_name_en" jdbcType="VARCHAR" property="menuNameEn" />
+    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="display_order" jdbcType="INTEGER" property="displayOrder" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pmid, parent_pmid, menu_type, menu_code, menu_name_ch, menu_name_en, menu_url, display_order, 
+    status, role_id
+  </sql>
+
+  <delete id="deleteByPmid" parameterType="java.lang.Integer">
+    delete from fy_partner_menus
+    where pmid = #{pmid,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertPartnerMenus" parameterType="PartnerMenusDto">
+    insert into fy_partner_menus
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="parentPmid != null">                              parent_pmid,            </if>
+      <if test="menuType != null">                                menu_type,              </if>
+      <if test="menuCode != null and menuCode != ''">             menu_code,              </if>
+      <if test="menuNameCh != null and menuNameCh != ''">         menu_name_ch,           </if>
+      <if test="menuNameEn != null and menuNameEn != ''">         menu_name_en,           </if>
+      <if test="menuUrl != null and menuUrl != ''">               menu_url,               </if>
+      <if test="displayOrder != null">                            display_order,          </if>
+      <if test="status != null">                                  status,                 </if>
+      <if test="roleId != null">                                  role_id,                </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="parentPmid != null">                              #{parentPmid,jdbcType=INTEGER},      </if>
+      <if test="menuType != null">                                #{menuType,jdbcType=INTEGER},        </if>
+      <if test="menuCode != null and menuCode != ''">             #{menuCode,jdbcType=VARCHAR},        </if>
+      <if test="menuNameCh != null and menuNameCh != ''">         #{menuNameCh,jdbcType=VARCHAR},      </if>
+      <if test="menuNameEn != null and menuNameEn != ''">         #{menuNameEn,jdbcType=VARCHAR},      </if>
+      <if test="menuUrl != null and menuUrl != ''">               #{menuUrl,jdbcType=VARCHAR},         </if>
+      <if test="displayOrder != null">                            #{displayOrder,jdbcType=INTEGER},    </if>
+      <if test="status != null">                                  #{status,jdbcType=INTEGER},          </if>
+      <if test="roleId != null">                                  #{roleId,jdbcType=INTEGER},          </if>
+    </trim>
+  </insert>
+
+  <select id="getPartnerMenus" parameterType="PartnerMenusDto" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fy_partner_menus
+    <where>
+      <if test="pmid != null">                                     AND pmid = #{pmid,jdbcType=INTEGER},                      </if>
+      <if test="parentPmid != null">                               AND parent_pmid = #{parentPmid,jdbcType=INTEGER},         </if>
+      <if test="menuType != null">                                 AND menu_type = #{menuType,jdbcType=INTEGER},             </if>
+      <if test="menuCode != null and menuCode != ''">              AND menu_code = #{menuCode,jdbcType=VARCHAR},             </if>
+      <if test="menuNameCh != null and menuNameCh != ''">          AND menu_name_ch = #{menuNameCh,jdbcType=VARCHAR},        </if>
+      <if test="menuNameEn != null and menuNameEn != ''">          AND menu_name_en = #{menuNameEn,jdbcType=VARCHAR},        </if>
+      <if test="menuUrl != null and menuUrl != ''">                AND menu_url = #{menuUrl,jdbcType=VARCHAR},               </if>
+      <if test="displayOrder != null">                             AND display_order = #{displayOrder,jdbcType=INTEGER},     </if>
+      <if test="status != null">                                   AND status = #{status,jdbcType=INTEGER},                  </if>
+      <if test="roleId != null">                                   AND role_id = #{roleId,jdbcType=INTEGER},                 </if>
+    </where>
+  </select>
+</mapper>

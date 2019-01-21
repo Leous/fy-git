@@ -39,10 +39,22 @@
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <h1 class="navbar-brand">foryou</h1>
+                    <h1 class="navbar-brand nav-logo">foryou</h1>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right nav-font">
+                    <ul class="nav navbar-nav navbar-left nav-fy">
+                        <li><a href="#">公告</a></li>
+                        <li class="dropdown">
+                            <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                梁帅
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a onclick="#">个人信息</a></li>
+                                <li><a onclick="#">退出</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right nav-fy">
                         <li><a href="#">公告</a></li>
                         <li class="dropdown">
                             <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

@@ -194,9 +194,11 @@ public class PartnerApi extends BasicApi {
             partnerUserDto.setAccount(account);
             partnerUserDto.setSalts(salts);
             partnerUserDto.setPartnerId(partnerId);
+            partnerUserDto.setRoleId(2);
             //加密方式：前端MD5(password)，服务器端MD5(password, salts)
             partnerUserDto.setPassword(FyUtils.getCertifiedSigned(password, salts));
             partnerUserDto.setCreateTime(new Date());
+            partnerUserDto.setIp(FyUtils.getIpAddr(request));
 
             Result<Integer> registerResult = partnerService.register(partnerDto, partnerUserDto);
             if(registerResult.isSuccess()){

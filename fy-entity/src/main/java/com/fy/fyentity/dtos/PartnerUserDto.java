@@ -12,13 +12,17 @@ public class PartnerUserDto implements Serializable {
 
     private Integer id;
 
+    private String partnerId;
+
+    private Integer roleId;
+
     private String account;
 
     private String password;
 
     private String salts;
 
-    private Date createTime;
+    private String ip;
 
-    private String partnerId;
+    private Date createTime;
 }
