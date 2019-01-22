@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 /**
- * @description:
+ * @description: 接口公共方法
  * @author: cnc
  * @date: 2019-01-08 0:36
  */

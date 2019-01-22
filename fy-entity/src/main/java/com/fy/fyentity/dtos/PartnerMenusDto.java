@@ -12,7 +12,7 @@ public class PartnerMenusDto extends BasicDto implements Serializable {
 
     private Integer parentPmid;
 
-    private Integer menuType;
+    private String menuType;
 
     private String menuCode;
 

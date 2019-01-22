@@ -4,7 +4,8 @@
   <resultMap id="BaseResultMap" type="com.fy.fyentity.dtos.PartnerMenusDto">
     <id column="pmid" jdbcType="INTEGER" property="pmid" />
     <result column="parent_pmid" jdbcType="INTEGER" property="parentPmid" />
-    <result column="menu_type" jdbcType="INTEGER" property="menuType" />
+    <result column="menu_level" jdbcType="INTEGER" property="menuLevel" />
+    <result column="menu_type" jdbcType="VARCHAR" property="menuType" />
     <result column="menu_code" jdbcType="VARCHAR" property="menuCode" />
     <result column="menu_name_ch" jdbcType="VARCHAR" property="menuNameCh" />
     <result column="menu_name_en" jdbcType="VARCHAR" property="menuNameEn" />
@@ -14,7 +15,7 @@
     <result column="role_id" jdbcType="INTEGER" property="roleId" />
   </resultMap>
   <sql id="Base_Column_List">
-    pmid, parent_pmid, menu_type, menu_code, menu_name_ch, menu_name_en, menu_url, display_order, 
+    pmid, parent_pmid, menu_level, menu_type, menu_code, menu_name_ch, menu_name_en, menu_url, display_order,
     status, role_id
   </sql>
 
@@ -27,7 +28,8 @@
     insert into fy_partner_menus
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="parentPmid != null">                              parent_pmid,            </if>
-      <if test="menuType != null">                                menu_type,              </if>
+      <if test="menuLevel != null">                               menu_level,             </if>
+      <if test="menuType != null and menuType != ''">             menu_type,              </if>
       <if test="menuCode != null and menuCode != ''">             menu_code,              </if>
       <if test="menuNameCh != null and menuNameCh != ''">         menu_name_ch,           </if>
       <if test="menuNameEn != null and menuNameEn != ''">         menu_name_en,           </if>
@@ -38,7 +40,8 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="parentPmid != null">                              #{parentPmid,jdbcType=INTEGER},      </if>
-      <if test="menuType != null">                                #{menuType,jdbcType=INTEGER},        </if>
+      <if test="menuLevel != null">                               #{menuLevel,jdbcType=INTEGER},      </if>
+      <if test="menuType != null and menuType != ''">             #{menuType,jdbcType=VARCHAR},        </if>
       <if test="menuCode != null and menuCode != ''">             #{menuCode,jdbcType=VARCHAR},        </if>
       <if test="menuNameCh != null and menuNameCh != ''">         #{menuNameCh,jdbcType=VARCHAR},      </if>
       <if test="menuNameEn != null and menuNameEn != ''">         #{menuNameEn,jdbcType=VARCHAR},      </if>

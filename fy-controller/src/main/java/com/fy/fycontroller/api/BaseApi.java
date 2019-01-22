@@ -24,4 +24,8 @@ public abstract class BaseApi {
     //首页
     protected static final String API_HOME = API_VERSION + "/" + "home";
     protected static final String API_HOME_INDEX = "index";
+
+    //用户系统菜单
+    protected static final String API_PARTNER_MENUS = API_VERSION +  "/" + "partnerMenus";
+    protected static final String API_PARTNER_MENUS_LIST = "list";
 }
