@@ -12,11 +12,10 @@
     <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
     <result column="display_order" jdbcType="INTEGER" property="displayOrder" />
     <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="role_id" jdbcType="INTEGER" property="roleId" />
   </resultMap>
   <sql id="Base_Column_List">
     pmid, parent_pmid, menu_level, menu_type, menu_code, menu_name_ch, menu_name_en, menu_url, display_order,
-    status, role_id
+    status
   </sql>
 
   <delete id="deleteByPmid" parameterType="java.lang.Integer">
@@ -36,7 +35,6 @@
       <if test="menuUrl != null and menuUrl != ''">               menu_url,               </if>
       <if test="displayOrder != null">                            display_order,          </if>
       <if test="status != null">                                  status,                 </if>
-      <if test="roleId != null">                                  role_id,                </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="parentPmid != null">                              #{parentPmid,jdbcType=INTEGER},      </if>
@@ -48,7 +46,6 @@
       <if test="menuUrl != null and menuUrl != ''">               #{menuUrl,jdbcType=VARCHAR},         </if>
       <if test="displayOrder != null">                            #{displayOrder,jdbcType=INTEGER},    </if>
       <if test="status != null">                                  #{status,jdbcType=INTEGER},          </if>
-      <if test="roleId != null">                                  #{roleId,jdbcType=INTEGER},          </if>
     </trim>
   </insert>
 
@@ -66,7 +63,6 @@
       <if test="menuUrl != null and menuUrl != ''">                AND menu_url = #{menuUrl,jdbcType=VARCHAR},               </if>
       <if test="displayOrder != null">                             AND display_order = #{displayOrder,jdbcType=INTEGER},     </if>
       <if test="status != null">                                   AND status = #{status,jdbcType=INTEGER},                  </if>
-      <if test="roleId != null">                                   AND role_id = #{roleId,jdbcType=INTEGER},                 </if>
     </where>
   </select>
 </mapper>

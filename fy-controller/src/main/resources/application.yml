@@ -48,7 +48,7 @@ spring:
     #打开慢SQL记录
     logSlowSql: true
     # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
-    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIRZBw4GXgLYtWS9hc4TbeKrZ7AAJ5+SIBKt0Bv465HzopE4REWc9MZ0E9SIWOeat2BPcwH0uj/WA31BFq2QXq8CAwEAAQ==
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJsINXQmgEtq+X11yw1pqnAXTlZiwmUFlDe4XoCwXI2R17FuHyUYQpiS97SGNU/iji16MdFX2od+fu1vx1ntspkCAwEAAQ==
     # 合并多个DruidDataSource的监控数据
     #useGlobalDataSourceStat: true
 

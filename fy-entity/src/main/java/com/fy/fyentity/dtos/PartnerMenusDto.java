@@ -25,6 +25,4 @@ public class PartnerMenusDto extends BasicDto implements Serializable {
     private Integer displayOrder;
 
     private Integer status;
-
-    private Integer roleId;
 }
