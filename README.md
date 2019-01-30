@@ -81,7 +81,7 @@
         type: com.alibaba.druid.pool.DruidDataSource
         url: jdbc:mysql://localhost:3306/fy?autoReconnect=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
         username: root
-        password: IFJLJdkF+kpKlyWlEbLh+vNICiUE0HOEV+PG1lGw8irhtYs3bu7J5Zxe1Gt+ikRuzIDMIkW+VdG3bqSAjkxv8A==
+        password: password
         druid:
           # 下面为连接池的补充设置，应用到上面所有数据源中
           # 初始化大小，最小，最大
@@ -106,7 +106,7 @@
           #打开慢SQL记录
           logSlowSql: true
           # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
-          connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIDUgl5MpS7I3dZ7MjqcjKnqWQ20lyC7kwxzdxWCVjoCLRCZjnP0D9wWTAoGojUEO4ueZFqlsYTMhe3I15TBHg8CAwEAAQ==
+          connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrypt=true;config.decrypt.key=public_key
           # 合并多个DruidDataSource的监控数据
           #useGlobalDataSourceStat: true
           # 配置DruidStatFilter
@@ -128,4 +128,4 @@
             # 登录密码
             login-password: 123456
 ```
-* 上面yml配置了druid监控数据库操作，展示在页面中，访问 http://localhost:8081/druid/login.html，输入设置好的账号密码就可以访问了
+* 上面yml末尾还配置了druid监控数据库操作，展示在页面中，访问 http://localhost:8081/druid/login.html，输入设置好的账号密码就可以访问了
