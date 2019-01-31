@@ -33,12 +33,12 @@ public class BasicApi {
             Long timestamp = baseRequest.getTimestamp();
 
             if(timestamp == null){
-                return new ResponseEntry(RespCodeEnum.HTTP_NOT_AUTHORIZATION.code(), RespCodeEnum.HTTP_NOT_AUTHORIZATION.getReasonCNPhrase(), "", null);
+                return new ResponseEntry(RespCodeEnum.HTTP_METHOD_NOT_ALLOWED.code(), RespCodeEnum.HTTP_METHOD_NOT_ALLOWED.getReasonCNPhrase(), "", null);
             }
 
             long now = System.currentTimeMillis();
             if((now - Long.valueOf(timestamp)) > FyConstants.COUNT_DOWN_TIME){
-                return new ResponseEntry(RespCodeEnum.HTTP_BAD_REQUEST.code(), RespCodeEnum.HTTP_BAD_REQUEST.getReasonCNPhrase(), "", null);
+                return new ResponseEntry(RespCodeEnum.HTTP_METHOD_NOT_ALLOWED.code(), RespCodeEnum.HTTP_METHOD_NOT_ALLOWED.getReasonCNPhrase(), "", null);
             }
 
             String sign = baseRequest.getSign();
@@ -51,9 +51,9 @@ public class BasicApi {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntry(RespCodeEnum.HTTP_NOT_AUTHORIZATION.code(), RespCodeEnum.HTTP_NOT_AUTHORIZATION.getReasonCNPhrase(), "", null);
+            return new ResponseEntry(RespCodeEnum.HTTP_METHOD_NOT_ALLOWED.code(), RespCodeEnum.HTTP_METHOD_NOT_ALLOWED.getReasonCNPhrase(), "", null);
         }
-        return new ResponseEntry(RespCodeEnum.HTTP_NOT_AUTHORIZATION.code(), RespCodeEnum.HTTP_NOT_AUTHORIZATION.getReasonCNPhrase(), "", null);
+        return new ResponseEntry(RespCodeEnum.HTTP_METHOD_NOT_ALLOWED.code(), RespCodeEnum.HTTP_METHOD_NOT_ALLOWED.getReasonCNPhrase(), "", null);
     }
 
     private static String createSignString(Map<String, Object> params) {

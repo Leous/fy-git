@@ -51,9 +51,6 @@ a.blue,.blue{color:#36c}
 .navbar-default{background: inherit;}
 
 .navbar-header{padding-left: 5px;}
-.navbar-header .navbar-brand{
-    color:#FFFFFF;
-}
 
 .navbar-fixed-top {
     top: 90px;
@@ -82,17 +79,9 @@ a.blue,.blue{color:#36c}
 
 @media(max-width:1366px) {
     .banner {
-        min-height: 700px;
+        min-height: 80px;
         position: relative;
-        background: url("/images/basic/background.jpg") no-repeat 0px 0px;
+        /*background: url("/images/basic/background.jpg") no-repeat 0px 0px;*/
         background-size: cover;
     }
-}
-
-.nav-fy .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
-    color: #FFFFFF;
-}
-
-.nav-logo .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
-    color: #FFFFFF;
 }

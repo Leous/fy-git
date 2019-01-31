@@ -31,7 +31,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = BaseApi.API_LOGIN)
-@Api(value = BaseApi.API_LOGIN, tags = "Login Api", description = "登录相关相关")
+@Api(value = BaseApi.API_LOGIN, tags = "Login Api", description = "登录相关接口")
 @Slf4j
 public class LoginApi extends BasicApi {
 
