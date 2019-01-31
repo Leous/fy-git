@@ -34,8 +34,4 @@ public abstract class BaseApi {
     //首页
     protected static final String API_HOME = API_VERSION + "/" + "home";
     protected static final String API_HOME_INDEX = "index";
-
-    //异常页面
-    protected static final String API_EXCEPTIONS = API_VERSION + "/" + "exceptions";
-    protected static final String API_EXCEPTIONS_404 = "404";
 }
