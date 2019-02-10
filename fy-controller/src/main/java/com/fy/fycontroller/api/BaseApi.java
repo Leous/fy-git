@@ -6,7 +6,7 @@ package com.fy.fycontroller.api;
  * @date: 2019-01-05 21:07:20
  */
 public abstract class BaseApi {
-    public static final String API_VERSION = "/api/v1";
+    public static final String API_VERSION = "/v1";
 
     //基础接口，共用接口
     protected static final String API_VERIFYCODE = API_VERSION + "/" + "basic";
@@ -34,4 +34,8 @@ public abstract class BaseApi {
     //首页
     protected static final String API_HOME = API_VERSION + "/" + "home";
     protected static final String API_HOME_INDEX = "index";
+
+    //异常页面
+    protected static final String API_EXCEPTION = API_VERSION + "/" + "exception";
+    protected static final String API_EXCEPTION_404 = "404";
 }

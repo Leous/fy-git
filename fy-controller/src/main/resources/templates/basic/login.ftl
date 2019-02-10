@@ -147,10 +147,10 @@
 <script>
     $(function () {
         $('#register_btn').on('click',function(){
-            window.location.href="/api/v1/register/toRegister";
+            window.location.href="/v1/register/toRegister";
         });
         $('#register_btn_mobile').on('click',function(){
-            window.location.href="/api/v1/register/toRegister";
+            window.location.href="/v1/register/toRegister";
         });
 
         $('#passwordEye').on('click', function () {
@@ -261,8 +261,8 @@
 
             $btn = $("#doLogin").button('loading');
             $.ajax({
-                url: '/api/v1/login/doLogin',
-                data: JSON.stringify(getSign(data, '/api/v1/login/doLogin')),
+                url: '/v1/login/doLogin',
+                data: JSON.stringify(getSign(data, '/v1/login/doLogin')),
                 type: 'POST',
                 contentType:"application/json",
                 dataType: 'json',
@@ -277,7 +277,7 @@
                             buttons: {
                                 'ok': {
                                     action: function () {
-                                        window.location.href="/api/v1/home/index";
+                                        window.location.href="/v1/home/index";
                                     }
                                 }
                             }
@@ -354,8 +354,8 @@
 
             $btn = $("#doMobileLogin").button('loading');
             $.ajax({
-                url: '/api/v1/partner/login',
-                data: JSON.stringify(getSign(data, '/api/v1/partner/login')),
+                url: '/v1/partner/login',
+                data: JSON.stringify(getSign(data, '/v1/partner/login')),
                 type: 'POST',
                 contentType:"application/json",
                 dataType: 'json',
@@ -370,7 +370,7 @@
                             buttons: {
                                 'ok': {
                                     action: function () {
-                                        window.location.href="/api/v1/partner/index";
+                                        window.location.href="/v1/partner/index";
                                     }
                                 }
                             }

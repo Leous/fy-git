@@ -108,7 +108,7 @@
 <script>
     $(function () {
         $('#returnLogin').on('click',function(){
-            window.location.href="/api/v1/login/toLogin";
+            window.location.href="/v1/login/toLogin";
         });
         $('#passwordEye').on('click', function () {
             var type = $('#fpassword').attr('type');
@@ -133,7 +133,7 @@
         });
         
         $('#mobile_btn').on('click', function () {
-            window.location.href="/api/v1/login/toLogin?from=0";
+            window.location.href="/v1/login/toLogin?from=0";
         });
 
         $('#wechat_btn').on('click', function () {
@@ -163,7 +163,7 @@
                             message: '请输入账号.'
                         }/*,
                         remote: {
-                            url: '/api/v1/register/verifyAccount',//验证地址
+                            url: '/v1/register/verifyAccount',//验证地址
                             message: '用户已存在',//提示消息
                             delay:  2000,//每输入一个字符，就发ajax请求，服务器压力还是太大，设置2秒发送一次ajax（默认输入一个字符，提交一次，服务器压力太大）
                             type: 'POST',
@@ -216,8 +216,8 @@
 
             $btn = $("#doRegister").button('loading');
             $.ajax({
-                url: '/api/v1/register/doRegister',
-                data: JSON.stringify(getSign(data, '/api/v1/register/doRegister')),
+                url: '/v1/register/doRegister',
+                data: JSON.stringify(getSign(data, '/v1/register/doRegister')),
                 type: 'POST',
                 contentType:"application/json",
                 dataType: 'json',
@@ -232,7 +232,7 @@
                             buttons: {
                                 '直接登录': {
                                     action: function () {
-                                        window.location.href="/api/v1/login/toLogin";
+                                        window.location.href="/v1/login/toLogin";
                                     }
                                 }
                             }

@@ -19,11 +19,11 @@ public class ApplicationAdapter extends WebMvcConfigurationSupport {
 //    private AuthorizationInterceptor authorizationInterceptor;
 
 //    private String[] excludePathPatterns = new String[] {
-//            "/api/v1/partner/register",
-//            "/api/v1/partner/toRegister",
-//            "/api/v1/partner/toLogin",
-//            "/api/v1/partner/getAreaCode",
-//            "/api/v1/partner/login"
+//            "/v1/partner/register",
+//            "/v1/partner/toRegister",
+//            "/v1/partner/toLogin",
+//            "/v1/partner/getAreaCode",
+//            "/v1/partner/login"
 //    };
 
     @Override
