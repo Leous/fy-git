@@ -1,5 +1,6 @@
 package com.fy.fyserver.impls;
 
+import com.fy.fycommon.utils.FyUtils;
 import com.fy.fyentity.dtos.PartnerDto;
 import com.fy.fyentity.dtos.PartnerUserDto;
 import com.fy.fyentity.results.Result;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -47,6 +49,20 @@ public class PartnerServiceImpl implements PartnerService {
                 result.setReturnMessage(verifyMap.get("verifyMessage").toString());
                 return result;
             }
+
+            String partnerId = FyUtils.getRandomNum(8);
+            //partnerId：默认6位随机数字
+            partnerDto.setPartnerId(partnerId);
+            partnerDto.setCreateTime(new Date());
+
+            //盐：6位随机字母
+            String salts = FyUtils.genRandomNum(6);
+            partnerUserDto.setSalts(salts);
+            partnerUserDto.setPartnerId(partnerId);
+            partnerUserDto.setRoleId(2);
+            //加密方式：前端MD5(password)，服务器端MD5(password, salts)
+            partnerUserDto.setPassword(FyUtils.getCertifiedSigned(partnerUserDto.getPassword(), salts));
+            partnerUserDto.setCreateTime(new Date());
 
             //插入用户操作员表，并获取puid
             partnerUserDao.insertPartnerUser(partnerUserDto);

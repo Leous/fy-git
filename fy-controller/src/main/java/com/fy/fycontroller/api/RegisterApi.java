@@ -135,24 +135,14 @@ public class RegisterApi extends BasicApi {
                 return new ResponseEntry(RespCodeEnum.BUSINESS_ERROR.code(), "两次输入的密码不一致.", "", null);
             }
 
-            String partnerId = FyUtils.getRandomNum(8);
+
             PartnerDto partnerDto = new PartnerDto();
             partnerDto.setType(Integer.parseInt(type));
-            //partnerId：默认6位随机数字
-            partnerDto.setPartnerId(partnerId);
             partnerDto.setPartnerName(account);
-            partnerDto.setCreateTime(new Date());
 
-            //盐：6位随机字母
-            String salts = FyUtils.genRandomNum(6);
             PartnerUserDto partnerUserDto = new PartnerUserDto();
             partnerUserDto.setAccount(account);
-            partnerUserDto.setSalts(salts);
-            partnerUserDto.setPartnerId(partnerId);
-            partnerUserDto.setRoleId(2);
-            //加密方式：前端MD5(password)，服务器端MD5(password, salts)
-            partnerUserDto.setPassword(FyUtils.getCertifiedSigned(password, salts));
-            partnerUserDto.setCreateTime(new Date());
+            partnerUserDto.setPassword(password);
             partnerUserDto.setIp(FyUtils.getIpAddr(request));
 
             Result<Integer> registerResult = partnerService.register(partnerDto, partnerUserDto);

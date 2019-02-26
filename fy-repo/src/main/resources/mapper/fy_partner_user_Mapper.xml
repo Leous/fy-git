@@ -43,11 +43,7 @@
     <include refid="Base_Column_List" />
     from fy_partner_user
     <where>
-      <if test="id != null">                                     AND id = #{id,jdbcType=INTEGER}               </if>
       <if test="account != null and account != ''">              AND account = #{account,jdbcType=VARCHAR}     </if>
-      <if test="partnerId != null and partnerId != ''">          AND partner_id = #{partnerId,jdbcType=VARCHAR} </if>
-      <if test="roleId != null and roleId != ''">                AND role_id = #{roleId,jdbcType=INTEGER}       </if>
-      <if test="ip != null and ip != ''">                        AND ip = #{ip,jdbcType=VARCHAR}               </if>
     </where>
   </select>
 </mapper>
